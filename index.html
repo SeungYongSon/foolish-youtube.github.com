@@ -1,0 +1,88 @@
+<div id="player"></div>
+<script>
+	// 2. This code loads the IFrame Player API code asynchronously.
+	var tag = document.createElement('script');
+
+	tag.src = "https://www.youtube.com/iframe_api";
+	var firstScriptTag = document.getElementsByTagName('script')[0];
+	firstScriptTag.parentNode.insertBefore(tag, firstScriptTag);
+	
+	var searchUrl = "https://www.youtube.com/results?search_query=" + getParameters('search');
+	var getHTML = file_get_contents(searchUrl);
+	var vId = htmlPassing(getHTML);
+
+	var player;
+	function onYouTubeIframeAPIReady() {
+		player = new YT.Player('player', {
+				height: '330',
+				width: '620',
+				videoId: vId,
+				startSeconds: 0,
+				playerVars: {
+					controls: 1,
+					disablekb: 1,
+					showinfo: 1
+				},
+				events: {
+					'onReady': onPlayerReady
+				},
+				playerVars: {
+					'showinfo': 0,
+					modestbranding: true,
+					'controls': 0, 
+					'rel' : 0,
+				}
+		});
+	}
+	
+	function onPlayerReady(event) {
+		player.setVolume(20);
+		player.playVideo();
+	}
+	
+	function stopVideo() {
+		player.stopVideo();
+	}
+	
+			
+	function getParameters(paramName) {
+		// 리턴값을 위한 변수 선언
+		var returnValue;
+
+		// 현재 URL 가져오기
+		var url = location.href;
+
+		// get 파라미터 값을 가져올 수 있는 ? 를 기점으로 slice 한 후 split 으로 나눔
+		var parameters = (url.slice(url.indexOf('?') + 1, url.length)).split('&');
+
+		// 나누어진 값의 비교를 통해 paramName 으로 요청된 데이터의 값만 return
+		for (var i = 0; i < parameters.length; i++) {
+			var varName = parameters[i].split('=')[0];
+			if (varName.toUpperCase() == paramName.toUpperCase()) {
+				returnValue = parameters[i].split('=')[1];
+				return decodeURIComponent(returnValue);
+			}
+		}
+	}
+	
+	function htmlPassing(html) {
+		var i = html.indexOf("?v=");
+	
+		var temp = html.substr(i, html.length);
+
+		i = temp.indexOf("=");
+		var j = temp.indexOf("\"");
+		temp = temp.substr(i+1, j-3);
+		
+		console.log(temp);
+		return temp;
+	}
+	
+	
+	function file_get_contents(url) {
+		var xhr = new XMLHttpRequest();
+		xhr.open("GET", url, false);
+		xhr.send();
+		return xhr.responseText;
+	}
+</script>
