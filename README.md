@@ -1,3 +1,3 @@
-# foolish-youtube.github.com
+# foolish-youtube.github.io
 
-foolish-youtube.github.com
+foolish-youtube.github.io
