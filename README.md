@@ -1,6 +1,6 @@
 # youtube-search.github.io
 
-![사용예시](youtube-search-using1.png "Using")
+![사용예시](youtube-search-using.png "Using")
 
 정말로 심플한 유튜브 검색과 동시에 영상이 틀어지는 검색기 이다.  
 유튜브에서 같은 노래를 무한반복으로 듣고 싶을 때 정말 사용하기 좋다.
