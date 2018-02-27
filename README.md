@@ -1,26 +1,23 @@
 # youtube-search.github.io
-유튜브 검색기
 
-## 해결하지 못한 이슈
-"No 'Access-Control-Allow-Origin' header is present on the requested resource." 이슈만 고치면 되는데 못 고치고 있다.... 
+![사용예시](youtube-search-using1.png "Using")
 
-## 사용법  
+정말로 심플한 유튜브 검색과 동시에 영상이 틀어지는 검색기 이다.  
+유튜브에서 같은 노래를 무한반복으로 듣고 싶을 때 정말 사용하기 좋다.
 
-몰론 "No 'Access-Control-Allow-Origin' header is present on the requested resource." 이슈가 해결되었다는 가정하에 사용이 가능하다.
+## 해결중인 문제
+현재 검색어 결과를 보여주는 웹페이지를 긁어오는 과정에서 Cross Domain 문제가 발생하고 있다.  
+Cross Domain 문제를 해결하거나 YouTube Data API (v3)를 통해 검색결과를 가져오는 방법을 쓸 예정이다.
 
-https://seungyongson.github.io/youtube-search.github.io/?search=검색어
+## 문제 해결하기 전까지 사용법  
 
-저 url에 자신이 원하는 검색어를 적고 들어가면 검색어에 맞는 유튜브 영상이 틀어진다.
-
-
-php 버젼은 별문제 없다. 그냥 아파치 서버에 넣고, 도메인/search-youtube.php/?search=원하는검색어 이렇게 사용하면 된다.
-
-# + 내용 추가  
-저 이슈는 Cross Domain 문제였다. 현재 고칠려고 노력하고 있다. 
-
-만약 정말 쓰고 싶다면 크롬 바로가기 속성에 대상에다가 --disable-web-security --user-data-dir="C:\chrome 을 추가해야한다.  
-예를 들어 대상이 C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" 이면  
+1. 크롬 바로가기를 하나 만든다.  
+2. 만든 바로가기에 속성에 들어가서 대상에 --disable-web-security --user-data-dir="C:\chrome 추가한다.  
+3. --disable-web-security --user-data-dir="C:\chrome 를 추가한 바로가기를 통해 크롬에 들어간다.  
+ex) 대상이 C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" 이면  
 C:\Program Files (x86)\Google\Chrome\Application\chrome.exe" --disable-web-security --user-data-dir="C:\chrome"  
 이렇게 내용을 바꾸면된다.  
+4. https://seungyongson.github.io/youtube-search.github.io/?search=원하는검색어 url을 적고 사이트에 들어간다.
+5. 그러면 검색어에 가장 가까운 유튜브 영상에 틀어진다.
 
-이제 바꾼 크롬 바로가기로 통해 크롬에 들어가서 위에 사용법대로 사용하면 된다.  
+# + 내용 추가 
